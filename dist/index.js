@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ExcelFile = void 0;
 const xlsx_1 = require("xlsx");
 class ExcelFile {
     /**
@@ -14,7 +13,7 @@ class ExcelFile {
          * @param row Row number (starts from 1)
          * @param column Column name (A, B, etc)
          */
-        this.getCell = (sheetName, row, column) => {
+        this.getCell = (sheetName, column, row) => {
             sheetName = this.workbook.SheetNames.find((s) => s === sheetName);
             if (!sheetName) {
                 throw new Error(`Worksheet ${sheetName} not found.`);
@@ -31,8 +30,8 @@ class ExcelFile {
          * @param row Row number (starts from 1)
          * @param column Column name (A, B, etc)
          */
-        this.getCellValue = (sheetName, row, column) => {
-            const cell = this.getCell(sheetName, row, column);
+        this.getCellValue = (sheetName, column, row) => {
+            const cell = this.getCell(sheetName, column, row);
             return cell ? cell.w || cell.v : undefined;
         };
         this.workbook = xlsx_1.readFile(filePath);

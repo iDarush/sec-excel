@@ -17,7 +17,7 @@ class ExcelFile {
      * @param row Row number (starts from 1)
      * @param column Column name (A, B, etc)
      */
-    getCell = (sheetName: string, row: number, column: string) => {
+    getCell = (sheetName: string, column: string, row: number) => {
         sheetName = this.workbook.SheetNames.find((s) => s === sheetName);
         if (!sheetName) {
             throw new Error(`Worksheet ${sheetName} not found.`);
@@ -38,8 +38,8 @@ class ExcelFile {
      * @param row Row number (starts from 1)
      * @param column Column name (A, B, etc)
      */
-    getCellValue = (sheetName: string, row: number, column: string) => {
-        const cell = this.getCell(sheetName, row, column);
+    getCellValue = (sheetName: string, column: string, row: number) => {
+        const cell = this.getCell(sheetName, column, row);
         return cell ? cell.w || cell.v : undefined;
     };
 }
