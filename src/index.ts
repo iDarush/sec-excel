@@ -18,14 +18,14 @@ class ExcelFile {
      * @param column Column name (A, B, etc)
      */
     getCell = (sheetName: string, column: string, row: number) => {
-        sheetName = this.workbook.SheetNames.find((s) => s === sheetName);
-        if (!sheetName) {
-            throw new Error(`Worksheet ${sheetName} not found.`);
+        const index = this.workbook.SheetNames.find((s) => s === sheetName);
+        if (!index) {
+            throw new Error(`Worksheet ${sheetName} not found within ${this.workbook.SheetNames.join(', ')}`);
         }
 
         column = column || '';
 
-        const worksheet: WorkSheet = this.workbook.Sheets[sheetName];
+        const worksheet: WorkSheet = this.workbook.Sheets[index];
         const address = `${column.toUpperCase()}${row}`;
         const cell = worksheet[address] as CellObject;
 
